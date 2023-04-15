@@ -37,5 +37,11 @@ class linuxtagRecipe(ConanFile):
         cmake.build()
 
     def package(self):
-        cmake = CMake(self)
-        cmake.install()
+        self.output.info(f"BUILD FOLDER : {self.build_folder}")
+        self.output.info(f"PACKAGE FOLDER : {self.package_folder}")
+        files.copy(self, pattern="*.a",
+                   src=self.build_folder,
+                   dst=f"{self.package_folder}/lib")
+        files.copy(self, pattern="*.hpp",
+                   src=f"{self.build_folder}/lib_linuxtag",
+                   dst=f"{self.package_folder}/include")
