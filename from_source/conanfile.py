@@ -46,3 +46,6 @@ class linuxtagRecipe(ConanFile):
         files.copy(self, pattern="*.hpp",
                    src=f"{self.build_folder}/lib_linuxtag",
                    dst=f"{self.package_folder}/include")
+
+    def package_info(self):
+        self.cpp_info.libs = files.collect_libs(self)
