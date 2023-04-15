@@ -11,7 +11,7 @@ class linuxtagRecipe(ConanFile):
 
     def set_version(self):
         git = Git(self, self.recipe_folder)
-        tag = git.run("describe --tags")
+        tag = git.run("describe --tags --abbrev=0")
         build = git.run("describe --long --tags").split('-')[-2]
         self.version = f"{tag}.{build}"
         self.output.info(f"version : {self.version}")
