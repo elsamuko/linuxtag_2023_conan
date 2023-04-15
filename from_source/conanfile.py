@@ -28,8 +28,9 @@ class linuxtagRecipe(ConanFile):
 
     def source(self):
         url = f"https://github.com/elsamuko/linuxtag_2023_conan/archive/refs/tags/{self.tag}.tar.gz"
+        sha256 = "d5e8524f1cea0fcf649188a1d68268203e8869fc18ee5d1f82d7a76fa8e2a235"
         self.output.info(f"downloading : {url}")
-        files.get(self, url, strip_root=True)
+        files.get(self, url, sha256=sha256, strip_root=True)
 
     def build(self):
         cmake = CMake(self)
