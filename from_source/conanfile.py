@@ -10,10 +10,11 @@ class linuxtagRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     def set_version(self):
+        '''version = tag.distance'''
         git = Git(self, self.recipe_folder)
         tag = git.run("describe --tags --abbrev=0")
-        build = git.run("describe --long --tags").split('-')[-2]
-        self.version = f"{tag}.{build}"
+        distance = git.run("describe --long --tags").split('-')[-2]
+        self.version = f"{tag}.{distance}"
         self.output.info(f"version : {self.version}")
 
     @property
@@ -27,6 +28,7 @@ class linuxtagRecipe(ConanFile):
         tc.generate()
 
     def source(self):
+        '''download sources from github, if sha256 is provided, the download is cached'''
         url = f"https://github.com/elsamuko/linuxtag_2023_conan/archive/refs/tags/{self.tag}.tar.gz"
         sha256 = "d5e8524f1cea0fcf649188a1d68268203e8869fc18ee5d1f82d7a76fa8e2a235"
         self.output.info(f"downloading : {url}")
