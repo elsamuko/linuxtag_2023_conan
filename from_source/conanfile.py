@@ -5,6 +5,17 @@ import conan.tools.files as files
 from conan.tools.scm import Git
 
 
+def enable_detailed_requests_logging():
+    import logging
+    import http.client as http_client
+    http_client.HTTPConnection.debuglevel = 1
+    logging.basicConfig()
+    logging.getLogger().setLevel(logging.DEBUG)
+    requests_log = logging.getLogger("requests.packages.urllib3")
+    requests_log.setLevel(logging.DEBUG)
+    requests_log.propagate = True
+
+
 class linuxtagRecipe(ConanFile):
     name = "linuxtag"
     settings = "os", "compiler", "build_type", "arch"
@@ -28,7 +39,8 @@ class linuxtagRecipe(ConanFile):
         tc.generate()
 
     def source(self):
-        '''download sources from github, if sha256 is provided, the download is cached'''
+        '''download sources from github'''
+        enable_detailed_requests_logging()
         url = f"https://github.com/elsamuko/linuxtag_2023_conan/archive/refs/tags/{self.tag}.tar.gz"
         sha256 = "d5e8524f1cea0fcf649188a1d68268203e8869fc18ee5d1f82d7a76fa8e2a235"
         self.output.info(f"downloading : {url}")
