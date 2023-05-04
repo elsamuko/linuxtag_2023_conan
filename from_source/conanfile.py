@@ -6,14 +6,7 @@ from conan.tools.scm import Git
 
 
 def enable_detailed_requests_logging():
-    import logging
-    import http.client as http_client
-    http_client.HTTPConnection.debuglevel = 1
-    logging.basicConfig()
-    logging.getLogger().setLevel(logging.DEBUG)
-    requests_log = logging.getLogger("requests.packages.urllib3")
-    requests_log.setLevel(logging.DEBUG)
-    requests_log.propagate = True
+    __import__("http").client.HTTPConnection.debuglevel = 1
 
 
 class linuxtagRecipe(ConanFile):
