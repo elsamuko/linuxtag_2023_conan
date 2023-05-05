@@ -49,5 +49,5 @@ deps_graph = api.graph.load_graph_requires(requires=requires,
 
 # print dependencies
 for node in deps_graph.nodes:
-    if node.context != conans.client.graph.graph.CONTEXT_BUILD and not node.test and node.ref:
+    if node.context != conans.client.graph.graph.CONTEXT_BUILD and node.ref:
         print(node.ref)
