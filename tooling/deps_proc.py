@@ -17,7 +17,9 @@ def run(command: str):
 this_dir = os.path.dirname(os.path.realpath(__file__))
 rv = run(f"conan graph info -f json {this_dir}/conanfile.py")
 as_json = json.loads(rv)
+nodes = as_json["graph"]["nodes"]
 
-for node in as_json["nodes"]:
+for key in nodes:
+    node = nodes[key]
     if node["context"] == "host" and node["ref"]:
         print(node["label"])
