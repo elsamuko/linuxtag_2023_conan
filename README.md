@@ -13,12 +13,15 @@ https://docs.conan.io/2/
 
 ### Info
 
-* `conan graph info`
+* `conan graph info .`
+* `conan graph info --requires boost/1.81.0`
+* `conan graph info . -f dot | dot -Tpng -o out.png`
 
 ## Create Packages
 
 * `conan new cmake_lib -d name=linuxtag -d version=1.0`
 * `conan create .`
+* `conan list linuxtag`
 * `conan test test_package linuxtag/1.0`
 
 ### From 3rd party source
