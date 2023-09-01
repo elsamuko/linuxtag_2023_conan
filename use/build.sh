@@ -8,6 +8,22 @@ function indent {
     sed  's/^/    /'
 }
 
+case "$(uname)" in
+    Linux)
+        COMPILER_OPTS=
+        ;;
+    Darwin)
+        COMPILER_OPTS="-s compiler.version=13"
+        ;;
+    CYGWIN*)
+        ;;
+    MINGW*|MSYS*)
+        ;;
+    *)
+        echo "Error: Unknown OS."
+        ;;
+esac
+
 echo
 red "generate profile"
 conan profile detect 2>&1 | indent
@@ -18,7 +34,7 @@ cd build || exit
 
 echo
 red "install boost"
-conan install .. -of conan -s compiler.version=13 2>&1 | indent
+conan install .. -of conan $COMPILER_OPTS 2>&1 | indent
 
 echo
 red "configure & build"
