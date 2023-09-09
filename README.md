@@ -16,6 +16,8 @@ https://docs.conan.io/2/
 * `conan graph info .`
 * `conan graph info --requires boost/1.81.0`
 * `conan graph info . -f dot | dot -Tpng -o out.png`
+* `conan list 'libcurl/*:*'` -> PACKAGE_ID
+* `conan cache path libcurl/8.0.1:$PACKAGE_ID`
 
 ## Create Packages
 
