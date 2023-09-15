@@ -33,10 +33,15 @@ https://docs.conan.io/2/
 
 ## Tooling
 
+* recommended: with subprocess
 * with API
-* with subprocess
 
 ## Server
 
 * `python3 -m pip install conan-server`
 * run with `conan_server`
+* update `~/.conan_server/server.conf` to allow uploads:
+```
+[write_permissions]
+*/*@*/*: *
+```
